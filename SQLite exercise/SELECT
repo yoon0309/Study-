@@ -1,1 +1,71 @@
 
+#https://www.sqlitetutorial.net/sqlite-select/ 
+#SQLite 튜토리얼 
+
+
+#SELECT명령문을 사용하여 다음과 같이 간단한 계산을 수행
+SELECT 1 + 1 ;
+
+1+1 
+2 
+
+#SELECT 다음과 같이 명령문에 여러 표현식을 사용할 수 있음 
+SELECT 
+   10 / 5, 
+   2 * 4 ;
+
+10/5    2*4
+2       8
+
+#ORDER BY - 결과 집합을 정렬 
+#DISTINCT - 테이블의 고유 행 쿼리 
+#WHERE - 결과 집합의 행 필터링 
+#LIMIT OFFSET - 반환되는 행 수 제한 
+#INNER JOIN 또는 LEFT JOIN 사용
+#GROUP BY - 그룹 행을 그룹으로 가져오고 각 그룹에 대해 집계함 수를 적용 
+#HAVING - 그룹 필터링 
+
+
+
+샘플 데이터베이스 tracks의 테이블을 살펴봄 
+
+tracks 
+-Name 
+-Albumid 
+-MediaTypeld 
+-Genreld
+-Composer 
+-Milliseconds
+-Bytes
+-UnitPrice
+
+#trackid, 트랙이름, 작곡가 및 단가와 같은 트랙 테이블에서 데이터를 가져오는 식 
+SELECT 
+      trackid,
+      name,
+      composer,
+      unitprice 
+From  
+      tracks; 
+
+#모든 열에서 데이터를 가져오려면 다음과 같이 절 tracks에서 테이블의 열을 지정 
+
+SELECT 
+       trackid,
+       name,
+       albumid,
+       mediatypeid,
+       genreid,
+       composer,
+       milliseconds,
+       bytes, 
+       unitprice
+FROM  
+       tracks; 
+
+
+#모든 데이터를 조회할 수 있음 
+
+SELECT * FROM tracks; 
+
+
