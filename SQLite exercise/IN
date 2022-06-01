@@ -1,0 +1,73 @@
+https://www.sqlitetutorial.net/sqlite-in/
+IN
+
+tracks 
+*Trackld 
+Name
+Albumid
+MediaTypeld 
+Genreld 
+Composer 
+Milliseconds
+Bytes 
+UnitPrice 
+
+MediaTypeld가 1 또는 2인 트랙을 쿼리
+SELECT 
+        TrackId, 
+        Name,
+        Mediatypeid
+FROM 
+        Tracks 
+WHERE   
+        MediaTypeld IN (1,2)
+        MediaTypeId = 1 OR MediaTypeId = 2
+ORDER BY 
+        Name ASC; 
+
+
+SELECT 
+        TrackId, 
+        Name,
+        Mediatypeid
+FROM 
+        Tracks 
+WHERE   
+        MediaTypeId = 1 OR MediaTypeId = 2
+ORDER BY 
+        Name ASC; 
+
+
+아티스트 ID 12의 앨범 ID 목록을 반환
+SELECT albumid 
+FROM albums
+WHERE artistid = 12; 
+
+아티스트 ID 12에 속하는 트랙을 가져오기 
+그런 다음 외부 쿼리는 하위 쿼리에서 반환된 앨범 ID 목록과 앨범 ID가 일치하는 모든 트랙을 반환
+SELECT
+	TrackId, 
+	Name, 
+	AlbumId
+FROM
+	Tracks
+WHERE
+	AlbumId IN (
+		SELECT
+			AlbumId
+		FROM
+			Albums
+		WHERE
+			ArtistId = 12
+	);
+
+
+genreid가 (1,2,3)목록에 없는 트랙목록을 반환 
+SELECT
+	trackid,
+	name,
+	genreid
+FROM
+	tracks
+WHERE
+	genreid NOT IN (1, 2,3);

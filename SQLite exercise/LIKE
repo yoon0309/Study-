@@ -1,0 +1,40 @@
+https://www.sqlitetutorial.net/sqlite-like/
+LIKE
+
+이름이 Wild 단어로 시작하는 트랙, Wild%
+SELECT 
+        trackid, 
+        name
+FROM
+        tracks
+WHERE 
+        name LIKE 'Wild%'
+
+
+이름이 Wild 단어로 끝나는 트랙, %Wild
+SELECT 
+        trackid,
+        name
+FROM    
+        tracks
+WHERE
+        name LIKE '%Wild'
+
+이름이 Wild 단어가 포함된 트랙, %Wild%
+SELECT 
+        trackid, 
+        name 
+FROM 
+        tracks
+WHERE
+        name LIKE '&Wild&';
+
+0개 이상의 문자(%), br다음 문자(_), wn 0개이상의 문자(%)
+SELECT 
+        trackid, 
+        name 
+FROM 
+        tracks
+WHERE   
+        name LIKE '%Br_wn%'; 
+

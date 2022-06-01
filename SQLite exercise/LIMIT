@@ -1,0 +1,100 @@
+
+#https://www.sqlitetutorial.net/sqlite-limit/
+#LIMIT 
+
+LIMIT 절은 SELECT 명령문의 선택적 부분 
+LIMIT하여 쿼리에서 반환되는 행수를 제한함 
+
+SELECT 
+        column_list
+FROM 
+        table
+LIMIT row_count; 
+
+#row_count행 수를 지정하는 양의 정수 
+
+테이블의 처음 10개 행을 가져오려면 tracks 다음 문을 사용함 
+SELECT 
+        trackid,
+        name
+FROM    
+        tracks
+LIMIT 10; 
+
+결과 집합의 n+1번째 행부터 시작하여 처음 n개의 행을 가져오려면 OFFSET 사용 
+
+SELECT
+        column_list
+FROM 
+        table   
+LIMIT row_count OFFSET offset;
+
+SELECT
+	column_list
+FROM
+	table
+LIMIT offset, row_count;
+
+테이블의 11번째 행부터 10개의 행을 가져오려면 tracks문을 사용 
+SELECT 
+        trackId,
+        name
+FROM
+        tracks
+LIMIT 10 OFFSET 10; 
+
+
+LIMIT 및 ORDER BY절 
+
+SELECT
+        column_list
+FROM 
+        table
+ORDER BY column_1
+LIMIT row_count;
+
+크기별로 상위 10개의 가장 큰 트랙을 가져오기 
+SELECT 
+        trackid
+        name,
+        bytes
+FROM
+        tracks
+ORDER BY 
+        bytes DESC
+LIMIT 10;
+
+5개의 짧은 트랙을 얻으려면 밀리초 열을 사용하여 지정된 길이로 트랙을 정렬하여 5개의 행을 가져오기 
+SELECT
+        trackid,
+        name,
+        Milliseconds
+FROM 
+        tracks
+ORDER BY 
+        milliseconds ASC
+LIMIT 5; 
+
+tracks테이블에서 두 번째로 긴 트랙을 반환
+
+SELECT 
+        trackid,
+        name,
+        milliseconds
+FROM 
+        tracks
+ORDER BY 
+        milliseconds DESC
+LIMIT 1 OFFSET 1; 
+
+tracks 테이블에서 세 번째로 작은 트랙을 가져옴 
+SELECT
+	trackid,
+	name,
+	bytes
+FROM
+	tracks
+ORDER BY
+	bytes
+LIMIT 1 OFFSET 2;
+

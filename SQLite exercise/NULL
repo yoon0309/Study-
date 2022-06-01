@@ -1,0 +1,40 @@
+https://www.sqlitetutorial.net/sqlite-is-null/
+NULL
+
+NULL- 알 수 없는 정보나 적용할 수 없는 정보를 나타냄 
+
+NULL은 숫자, 0, 빈 문자열 등과 같지 않음 
+NULL은 자신과 같지 않음 
+NULL= NULL
+
+작곡가가 NULL인 트랙을 찾으려고 시도 
+SELECT 
+        Name,
+        Composer
+FROM    
+        tracks
+WHERE 
+        Composer = NULL; 
+
+작곡가를 알 수 없는 모든 트랙을 찾으려면 IS NULL연산자 
+SELECT 
+        Name,
+        Composer
+FROM 
+        tracks
+WHERE      
+        Composer IS NULL 
+ORDER BY
+        Name;
+
+tracks의 작곡가가 NULL이 아닌 것을 찾기 
+SELECT 
+        Name,
+        Composer
+FROM 
+        tracks 
+WHERE 
+        Composer IS NOT NULL 
+ORDER BY
+        Name; 
+
