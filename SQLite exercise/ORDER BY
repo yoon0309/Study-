@@ -1,1 +1,54 @@
+#https://www.sqlitetutorial.net/sqlite-order-by
+#ORDER BY 
+
+
+SELECT 
+     select_list 
+FROM 
+     table 
+ORDER BY 
+        column_1 ASC,
+        column_2 DESC; 
+
+ASC  - 오름차순 
+DESC - 내림차순
+
+albumid(3번째 열), millisecond(2번째 열)을 기준으로 트랙을 오름차순으로 정렬 
+
+SELECT 
+       name,
+       milliseconds,
+       albumid
+FROM
+       tracks 
+ORDER BY
+       3,2
+
+#NULL 정렬 - 정보가 누락되었거나 해당 데이터가 적용되지 않음을 나타냄 
+
+
+ORDER BY절을 사용하여 작곡가별로 트랙을 정렬
+
+SELECT 
+      Trakld,
+      Name,
+      Composer
+FROM
+      tracks
+ORDER BY
+      Composer; 
+
+
+>>> composer이 NULL값이 나옴 
+
+SELECT 
+    TrackId, 
+    Name, 
+    Composer 
+FROM 
+    tracks
+ORDER BY 
+    Composer NULLS LAST;
+
+>>> composer이 NULL LAST옵션을 이용하면 다른 값 뒤에 NULL을 배치함 
 

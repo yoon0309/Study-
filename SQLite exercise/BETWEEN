@@ -1,1 +1,67 @@
+#https://www.sqlitetutorial.net/sqlite-between/
+#BETWEEN
+
+
+invoices
+*Invoiced 
+Customed 
+InvoiceDate
+BilingAddress
+BilingCity
+BilingState
+BilingCountry
+BilingPostalCode
+Total 
+
+합계가 between 14.96 및 18.86인 송장을 찾습니다. 
+
+SELECT 
+        Invoiceld,
+        BilingAddress,
+        Total
+FROM    
+        invoices 
+WHERE 
+        Total BETWEEN 14.91 and 18.86
+ORDER BY
+    Total ; 
+
+합계 1에서 20사이가 아닌 송장을 찾기 
+
+SELECT 
+        Invoiced,
+        BillingAddress,
+        Total
+FROM
+        invoices 
+WHERE 
+        Total NOT BETWEEN 1 and 20
+ORDER BY
+        Total;
+
+송장 날짜가 2010-01-01에서 2010-01-31인 송장을 찾기
+SELECT 
+    Invoiced,
+    BillingAddress,
+    InvoiceDate,
+    Total
+FROM 
+    invoices 
+WHERE   
+    InvoiceDate BETWEEN '2010-01-01' AND '2010-01-31'
+ORDER BY
+    InvoiceDate; 
+
+송장 날짜가 2009년 1월 3일과 2013년 12월 1일 사이가 아닌 송장을 찾기 
+SELECT 
+    InvoiceId,
+    BillingAddress,
+    date(InvoiceDate) InvoiceDate,
+    Total 
+FROM 
+    invoices 
+WHERE 
+    InvoiceDate NOT BETWEEN '2009-01-03' AND '2013-12-01'
+ORDER BY 
+    InvoiceDate; 
 
