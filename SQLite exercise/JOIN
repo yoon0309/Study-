@@ -1,0 +1,157 @@
+JOIN
+https://www.sqlitetutorial.net/sqlite-join/
+
+albums      -    artist 
+AlbumId          ArtistId
+Title             Name
+ArtistId
+
+
+INNER JOIN 
+
+#앨범 제목과 해당 아티스트 이름을 반환함 
+SELECT 
+        Title,
+        Name
+FROM 
+        albums
+INNER JOIN artists 
+    ON artists.ArtistId = albums.ArtistId; 
+
+#artist 와 albums 테이블에서 아티스트 이름과 앨범 제목을 선택 
+SELECT 
+        Name,
+        Title
+FROM
+        artists 
+LEFT JOIN albums ON 
+    artists.ArtistId = albums.ArtistId 
+ORDER BY Name;
+
+
+#artist와 albums 테이블에서 앨범이 없는 아티스트를 찾으려면 WHERE절을 추가할 수 있음 
+SELECT 
+        Name,
+        Title 
+FROM    
+        artists
+LEFT JOIN albums ON
+    artists.ArtistId = albums.ArtistId 
+WHERE Title IS NULL
+ORDER BY Name;
+
+#products및 calendars테이블을 생성 후(생략) 
+CROSS JOIN절을 사용하여 제품을 월과 결합함
+
+SELECT * 
+FROM products
+CROSS JOIN calendars;
+
+
+https://www.sqlitetutorial.net/sqlite-inner-join/
+Inner Join - 상관테이블의 열을 결합함, 교집합
+
+tracks       -      albums 
+TrackId             *AlbumId
+Name                 Title
+*AlbumId             ArtistId
+MEdiaTypeId
+GerneId 
+Composer 
+Milliseconds
+Bytes
+UnitPrice
+
+#tracks테이블에서 열 AlbumId은 외래 키
+#albums테이블에서 AlbumId는 기본 키
+#tracks및 albums 테이블 모두에서 데이터를 쿼리
+
+SELECT
+	trackid,
+	name,
+	title
+FROM
+	tracks
+INNER JOIN albums ON albums.albumid = tracks.albumid; 
+
+
+tracks      -    albums     -    artists  
+TrackId          *AlbumId        *ArtistId 
+Name              Title           Name
+*AlbumId         *ArtstId 
+MediaTypeId 
+GenreId 
+Composer 
+Milliseconds
+Bytes 
+UnitPrice
+
+
+SELECT
+    trackid,
+    tracks.name AS track,
+    albums.title AS album,
+    artists.name AS artist
+FROM
+    tracks
+    INNER JOIN albums ON albums.albumid = tracks.albumid
+    INNER JOIN artists ON artists.artistid = albums.artistid;
+
+
+#WHERE 절을 사용 하여 다음 명령문과 같이 ID가 10인 아티스트의 트랙과 앨범을 가져옴 
+
+SELECT
+	trackid,
+	tracks.name AS Track,
+	albums.title AS Album,
+	artists.name AS Artist
+FROM
+	tracks
+INNER JOIN albums ON albums.albumid = tracks.albumid
+INNER JOIN artists ON artists.artistid = albums.artistid
+WHERE
+	artists.artistid = 10;
+
+
+https://www.sqlitetutorial.net/sqlite-self-join/
+self-join
+
+employees 
+employeeId 
+LastName 
+FirstName
+Title
+ReportsTo
+BirthDate 
+HireDate 
+Address
+City
+State 
+Country
+PostalCode
+Phone 
+Fax
+Email 
+
+#누가 누구의 직속 부하인지에 대한 정보를 얻기 
+SELECT m.firstname ||''|| m.lastname AS 'Manager', 
+       e.firstname ||''|| e.lastname AS 'Direct report'
+FROM employees e 
+INNER JOIN employees m ON m.employeeid = e.reprotsto 
+ORDER BY manager; 
+
+#같은 도시에 있는 직원 찾기 
+SELECT DISTINCT
+	e1.city,
+	e1.firstName || ' ' || e1.lastname AS fullname
+FROM
+	employees e1
+INNER JOIN employees e2 ON e2.city = e1.city 
+   AND (e1.firstname <> e2.firstname AND e1.lastname <> e2.lastname)
+ORDER BY
+	e1.city;
+>>> e1.city = e2.city 
+    두 직원이 같은 도시에 있는지 확인하기 위해 
+>>> e.firstname <> e2.firstname AND e1.lastname <> e2.lastname 
+    동일한 이름과 성을 가진 직원이 없다는 가정 하에 e1 및 e2를 통해 동일한 직원이 아님 을 확인
+

@@ -1,0 +1,139 @@
+https://www.sqlitetutorial.net/sqlite-group-by/
+GROUP BY
+
+tracks
+TracksId
+Name 
+AlbumId
+MediatypeId 
+GenreId 
+Composer
+Millisecond 
+Bytes 
+UnitPrice 
+
+#앨범 ID와 앨범 당 트랙 수를 반환 
+
+SELECT 
+        albumid
+        COUNT(Tracksid)
+FROM    
+        tracks
+GROUP BY 
+        albumid;
+
+
+#앨범 ID와 앨범 당 트랙 수를 반환, ORDER BY와 같이 그룹을 정렬(내림차순) 
+
+SELECT
+	albumid,
+	COUNT(trackid)
+FROM
+	tracks
+GROUP BY
+	albumid
+ORDER BY COUNT(trackid) DESC;
+
+tracks        -       albums 
+TracksId             AlbumId
+Name                  Title
+AlbumId              ArtistId
+MediatypeId
+GenreId
+Composer
+Millisecond
+Bytes
+UnitPrice
+
+
+#tracks테이블과 테이블 albums을 결합하여 앨범의 제목을 가져오고 
+#이 GROUP BY절을 COUNT함수와 함께 사용하여 앨범당 트랙 수를 가져옴
+
+SELECT 
+        tracks.albumid,
+        Title,
+        COUNT(trackid)
+FROM 
+        tracks
+
+INNER JOIN albums ON albums.albumid = tracks.albumid
+GROUP BY
+        tracks.albumid;
+
+#GROUP BY with HAVING절을 사용 
+#15개 이상의 트랙이 있는 앨범을 가져오려면 다음 문을 사용
+SELECT 
+        trackid.albumid,
+        Title,
+        COUNT(trackid)
+FROM 
+        tracks
+INNER JOIN albums ON albums.albumid = tracks.albumid
+GROUP BY
+        tracks.albumid
+HAVING COUNT(trackid) > 15;
+
+#각 앨범의 총 길이와 바이트를 얻으려면 SUM함수를 사용하여 총 밀리초와 바이트를 계산
+SELECT 
+        albumid,
+        SUM(millisecond) length,
+        SUM(bytes) size
+FROM
+        tracks
+GROUP BY 
+        albumid;
+
+#tracks 테이블에 있는 앨범 ID, 앨범 제목, 최대 길이, 최소 길이 및 평균 트랙 길이를 나타냄
+SELECT 
+        tracks.albumid,
+        Title, 
+        min(milliseconds),
+        macx(milliseconds),
+        round(avg(milliseconds),2)
+FROM
+        tracks
+INNER JOIN albums ON albums.albumid = tracks.albumid
+GROUP BY 
+        tracks.albumid;
+
+# 미디어 유형 및 장르별로 트랙을 그룹화
+SELECT 
+    MediatypeId,
+    GenreId,
+    COUNT(TrackId)
+FROM
+    tracks
+GROUP BY
+    MediatypeId,
+    GenreId;
+
+
+invoices 
+Invoices
+CustomerId 
+InvoiceDate 
+BillingAddress
+BillingCity
+BillingState
+BillingCountry
+BillingPostalCode
+Total 
+
+#연도별 송장 번호를 반환
+SELECT
+   STRFTIME('%Y', InvoiceDate) InvoiceYear, 
+   COUNT(InvoiceId) InvoiceCount
+FROM
+   invoices
+GROUP BY
+   STRFTIME('%Y', InvoiceDate)
+ORDER BY
+   InvoiceYear;
+
+**STRFTIME('%Y', InvoiceDate), 날짜 문자열에서 연도를 반환 
+  GROUP BY조항은 송장을 연도별로 그룹화 
+  함수 COUNT()는 각 연도(또는 그룹)의 송장 번호를 반환 
+
+
+
+
