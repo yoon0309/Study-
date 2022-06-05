@@ -11,5 +11,6 @@ https://www.sqlitetutorial.net/의 SQLite 튜토리얼을 따라 업데이트
 
 3. python exercises
 
+https://github.com/teddylee777/machine-learning.git
 eddylee777/machine-learning의 자료구조 - 파이썬 연습을 따라 업데이트중입니다. 
 
