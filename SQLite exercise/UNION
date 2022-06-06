@@ -1,0 +1,43 @@
+https://www.sqlitetutorial.net/sqlite-union/
+UNION
+
+둘 이상의 쿼리 행을 단일 결과 집합으로 결합 
+
+
+*UNION 
+
+SELECT v1 
+  FROM t1
+UNION
+SELECT v2
+  FROM t2
+
+
+T1은 123
+T2은 234 
+T1 UNION T2은 1234
+
+
+*UNION ALL
+
+SELECT v1
+  FROM t1
+UNION ALL 
+SELECT v2
+ FROM t2
+
+T1은 123
+T2은 234 
+T1 UNION T2은 123 234
+
+
+UNION 연산자를 사용, 직원과 고객의 이름을 단일 목록으로 결합
+SELECT FirstName, LastName, 'Employee' AS Type
+FROM employees 
+UNION
+SELECT FirstName, LastName, 'Customer'
+FROM customers; 
+
++이름 목록을 이름과 성을 기준으로 정렬함 
+ORDER BY FirstName, LastName;
+
